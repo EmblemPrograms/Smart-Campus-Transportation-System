@@ -1,0 +1,38 @@
+# regenerable / environment dirs
+node_modules/
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# secrets & local config (keep example/sample templates)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+config.py
+config.local.php
+config.local.js
+config.secret.*
+settings.local.py
+local_settings.py
+secrets.json
+credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# PHP config / DB connection files (often hold DB credentials)
+config.php
+configuration.php
+db.php
+dbconn.php
+dbconnect.php
+dbconfig.php
+database.php
+connect.php
+connection.php
+conn.php

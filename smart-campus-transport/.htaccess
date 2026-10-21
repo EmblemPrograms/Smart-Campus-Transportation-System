@@ -1,0 +1,33 @@
+# =============================================================================
+# Smart Campus Transportation System - Apache configuration
+# Federal Polytechnic Ede
+# =============================================================================
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Protect sensitive application directories from direct HTTP access
+    RewriteRule ^(config|includes|classes|models|controllers|logs)/ - [F,L]
+
+    # Block direct download / browsing of SQL dumps and env-like files
+    RewriteRule \.(sql|env|log|bak|config)$ - [F,L]
+</IfModule>
+
+# Extra denial via FilesMatch (works even if rewrite is limited)
+<FilesMatch "\.(sql|env|log|bak)$">
+    Require all denied
+</FilesMatch>
+
+# Deny access to hidden files (e.g. .git, .ht* except this file is processed by Apache)
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Prevent script execution inside upload directories if someone drops PHP there
+<IfModule mod_rewrite.c>
+    RewriteRule ^uploads/.*\.(?i:php|phtml|php3|php4|php5|phar)$ - [F,L]
+</IfModule>
